@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DakshRaj Hair Systems - Premium Hair Solutions</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght=400;500;600;700&display=swap" rel="stylesheet">
     <style>
         :root {
             --primary: #121212;
@@ -160,6 +160,7 @@
             color: var(--text-light);
             font-size: 1.8rem;
             cursor: pointer;
+            position: relative; /* Added for notification positioning */
         }
         
         /* Mobile Menu */
@@ -945,6 +946,44 @@
                 transform: translateY(0);
             }
         }
+
+        /* NEW: Notification Styles */
+        /* Base Notification Style */
+        .cart-notification {
+            background: var(--secondary);
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            font-size: 0.9rem;
+            white-space: nowrap;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+            z-index: 3000; /* Ensure it's above other content */
+            position: absolute; /* Make it absolute to position relative to parent or body */
+        }
+
+        /* Mobile Pop-up Notification */
+        /* This will be positioned dynamically via JS relative to mobile-menu-btn */
+        .cart-notification-mobile {
+            background: var(--secondary); /* Use primary accent for mobile */
+            /* Top and Left will be set by JS */
+        }
+
+        /* Desktop Inline Notification */
+        .cart-notification-desktop {
+            top: -10px; /* Adjust to position above/next to the cart icon */
+            right: -20px; /* Adjust to position above/next to the cart icon */
+            background: var(--accent); /* Different color for emphasis on desktop */
+        }
+
+        @keyframes fadeInOutNotification {
+            0% { opacity: 0; visibility: hidden; }
+            10% { opacity: 1; visibility: visible; }
+            90% { opacity: 1; visibility: visible; }
+            100% { opacity: 0; visibility: hidden; }
+        }
         
         /* Responsive Styles */
         @media (max-width: 992px) {
@@ -953,15 +992,32 @@
             }
             
             .nav-links {
-                gap: 1.5rem;
+                display: none; /* Hide desktop nav links on smaller screens */
             }
             
             .mobile-menu-btn {
-                display: block;
+                display: block; /* Show mobile menu button */
+            }
+
+            /* Ensure cart icon is visible on mobile next to mobile menu button */
+            .header-content {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                padding: 0 1.5rem;
+            }
+            /* Add this to style the list items directly under header-content */
+            .header-content .nav-links ul {
+                display: none; /* Hide regular nav list */
             }
             
-            .nav-links {
-                display: none;
+            /* The cart icon itself should remain hidden in the main header-content
+               when mobile menu is active, as it's part of the desktop nav-links structure.
+               The mobile-menu has its own cart icon.
+               The notification logic will handle positioning relative to mobile-menu-btn.
+            */
+            .cart-icon {
+                display: none; /* Hide cart icon in header on mobile */
             }
 
             .product-detail-content {
@@ -1055,8 +1111,7 @@
             .product-detail-actions {
                 flex-direction: column;
             }
-        }
-    </style>
+        </style>
 </head>
 <body>
     <header class="header">
@@ -1463,7 +1518,7 @@
                 category: "Hair Patch Tap",
                 description: "Modern layered bob wig with textured ends for a contemporary look. Made from high-quality synthetic fibers that maintain their style.",
                 price: 330,
-                image: "https://rukminim2.flixcart.com/image/704/844/xif0q/hair-accessory/l/f/h/wig-tape-double-sided-transparent-easy-use-1-jons0n-yellow-tape-original-imah3q7fdhzx3cuf.jpeg?q=90&crop=false"
+                image: "https://rukminim2.flipkart.com/image/704/844/xif0q/hair-accessory/l/f/h/wig-tape-double-sided-transparent-easy-use-1-jons0n-yellow-tape-original-imah3q7fdhzx3cuf.jpeg?q=90&crop=false"
             },
             {
                 id: 29,
@@ -1626,6 +1681,49 @@
             productDetailModal.classList.remove('active');
         }
 
+        // Show transient notification
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.textContent = message;
+            notification.classList.add('cart-notification');
+
+            if (window.innerWidth <= 992) { // Mobile view
+                notification.classList.add('cart-notification-mobile');
+                document.body.appendChild(notification); // Append to body for absolute positioning
+
+                const btnRect = mobileMenuBtn.getBoundingClientRect();
+                
+                // Set initial position for calculation
+                notification.style.left = `${btnRect.left + window.scrollX + (btnRect.width / 2)}px`;
+                // Temporarily set a top to make it visible and get its height
+                notification.style.top = `${btnRect.bottom + window.scrollY + 5}px`; 
+                notification.style.visibility = 'visible'; // Make visible to calculate offsetHeight
+                notification.style.transform = 'translateX(-50%)'; /* Center horizontally */
+                
+                // Now, readjust the top to be above the button
+                notification.style.top = `${btnRect.top + window.scrollY - notification.offsetHeight - 5}px`;
+                
+            } else { // Desktop view
+                notification.classList.add('cart-notification-desktop');
+                cartIcon.appendChild(notification);
+            }
+
+            // Trigger transition by setting opacity after a short delay
+            setTimeout(() => {
+                notification.style.opacity = '1';
+            }, 10); // Small delay to allow CSS transition to work
+
+            // Remove the notification after some time
+            setTimeout(() => {
+                notification.style.opacity = '0';
+                notification.style.visibility = 'hidden';
+                // Remove from DOM after fade out
+                setTimeout(() => {
+                    notification.remove();
+                }, 300); // Match CSS transition duration
+            }, 2500); // Display duration before starting fade out
+        }
+
 
         // Add product to cart
         function addToCart(productId, quantityToAdd = 1) {
@@ -1634,47 +1732,24 @@
                 const existingItem = cart.find(item => item.id === productId);
                 
                 if (existingItem) {
-                    // If item exists, ensure quantity meets minimum if adding from button that enforces it
                     if (quantityToAdd === MIN_ORDER_QUANTITY && existingItem.quantity < MIN_ORDER_QUANTITY) {
                          existingItem.quantity = MIN_ORDER_QUANTITY;
-                         showNotification(`${product.name} quantity adjusted to minimum ${MIN_ORDER_QUANTITY}.`);
+                         showNotification("Quantity adjusted!");
                     } else if (quantityToAdd === MIN_ORDER_QUANTITY) {
                          existingItem.quantity += quantityToAdd;
-                         showNotification(`${product.name} quantity increased by ${quantityToAdd}.`);
+                         showNotification("Item added!");
                     } else { // For quantity controls inside cart
                         existingItem.quantity += quantityToAdd;
+                        showNotification("Quantity updated!");
                     }
                 } else {
                     cart.push({...product, quantity: Math.max(quantityToAdd, MIN_ORDER_QUANTITY)}); // Ensure min quantity
-                    showNotification(`${product.name} added to cart (Min ${MIN_ORDER_QUANTITY} pieces).`);
+                    showNotification("Item added!");
                 }
                 
                 updateCartCount();
                 renderCartItems();
             }
-        }
-
-        // Show transient notification
-        function showNotification(message) {
-            const notification = document.createElement('div');
-            notification.textContent = message;
-            notification.style.cssText = `
-                position: fixed;
-                top: 20px;
-                right: 20px;
-                background: var(--secondary);
-                color: white;
-                padding: 15px 25px;
-                border-radius: 8px;
-                z-index: 3000;
-                box-shadow: 0 5px 15px rgba(0,0,0,0.3);
-                animation: fadeIn 0.3s, fadeOut 0.3s 2.7s forwards; /* Use forwards to keep final state */
-            `;
-            document.body.appendChild(notification);
-            
-            setTimeout(() => {
-                notification.remove();
-            }, 3000);
         }
 
         // Update cart count in header
@@ -1779,30 +1854,7 @@
                     hasError = true;
                     return;
                 }
-                // Apply price * 10 logic here if the "into 10" refers to a price multiplier at checkout
-                // Assuming "into 10 minimum order quantity 10 pieces" means if quantity is 10 or more, price is multiplied by 10.
-                // If it means price *per* piece, then the current `item.price * item.quantity` is correct.
-                // Given the phrasing, I'm interpreting it as the base price of *each* piece is effectively multiplied by 10
-                // if the order quantity for *that item* is 10 or more.
-                // If the interpretation is that the ENTIRE total order price is multiplied by 10, then the logic would be different.
-                // For clarity and direct interpretation of "price mein check out karte time into 10 minimum order quantity 10 pieces",
-                // I'm assuming the *item price* itself gets multiplied for that quantity range.
-                // If it's a fixed discount after 10 pieces, you'd adjust the item.price for display.
-                // For now, let's assume `price * 10` is part of the final calculation IF quantity is >= 10.
-                // However, given the context, it's more likely the "into 10" is referring to the minimum quantity itself,
-                // and the current `item.price * item.quantity` is the correct total per item.
-                // Let's stick to the interpretation that "into 10" relates to the *minimum quantity*, not a price multiplier at checkout.
-                // If `into 10` means a specific *price change* for bulk orders (e.g., price becomes 10 times the listed value, which is unusual),
-                // please clarify. For now, I will treat "into 10 minimum order quantity 10 pieces" as simply meaning a minimum of 10 pieces.
-                // If the user meant "price per piece should be 10 times higher for orders >= 10" this is a very unusual pricing model.
-                // Most likely, they mean "you must order a minimum of 10 pieces, and the price will be for those 10 pieces."
-                // I will proceed assuming the minimum quantity is 10 and the price logic remains `item.price * item.quantity`.
-                // If "into 10" means a bulk price of `item.price * 10` for `10` quantity, and `item.price * quantity` for higher quantities,
-                // that's also a possibility, but less common for "into 10" phrasing.
-                // The current code already calculates `item.price * item.quantity`. The "into 10" phrasing is ambiguous.
-                // I will NOT multiply the price by 10 for each item *again* here, as the base price already implies per piece.
-                // The minimum order quantity of 10 pieces is the primary constraint.
-
+                
                 message += `- ${item.name} (Qty: ${item.quantity} pieces) - ₹${(item.price * item.quantity).toLocaleString('en-IN')}\n`;
                 total += item.price * item.quantity;
             });
@@ -1837,3 +1889,4 @@
     </script>
 </body>
 </html>
+
