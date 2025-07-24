@@ -1,0 +1,1839 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>DakshRaj Hair Systems - Premium Hair Solutions</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #121212;
+            --secondary: #ff7e33;
+            --accent: #25d366;
+            --text-light: #f0f0f0;
+            --text-dark: #333;
+            --card-bg: #1e1e1e;
+            --card-hover: #2a2a2a;
+            --border: #333;
+            --overlay: rgba(0, 0, 0, 0.8);
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background: linear-gradient(135deg, #0c0c0cff, #1a1a1a);
+            color: var(--text-light);
+            font-family: 'Montserrat', sans-serif;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+        
+        /* Header Styles */
+        .header {
+            background: none;
+            padding: 1rem 0;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+            backdrop-filter: blur(10px);
+        }
+        
+        .header-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            text-decoration: none;
+        }
+        
+        .logo-icon {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, #ff7e33, #ff5e00);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: bold;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 15px rgba(255, 126, 51, 0.4);
+        }
+        
+        .logo-text {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            font-family: 'Poppins', sans-serif;
+        }
+        
+        .logo-text span {
+            font-weight: 300;
+            font-size: 0.9rem;
+            display: block;
+            letter-spacing: 2px;
+            color: #ff7e33;
+        }
+        
+        .nav-links {
+            display: flex;
+            align-items: center;
+            gap: 2.5rem;
+            list-style: none;
+        }
+        
+        .nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-weight: 500;
+            position: relative;
+            padding: 0.5rem 0;
+            font-size: 1.1rem;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-links a:hover, .nav-links a.active {
+            color: var(--secondary);
+        }
+        
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--secondary);
+            transition: width 0.3s ease;
+        }
+        
+        .nav-links a:hover::after, .nav-links a.active::after {
+            width: 100%;
+        }
+        
+        .cart-icon {
+            position: relative;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        
+        .cart-icon:hover {
+            color: var(--secondary);
+            transform: translateY(-3px);
+        }
+        
+        .cart-count {
+            position: absolute;
+            top: -8px;
+            right: -12px;
+            background: var(--secondary);
+            color: white;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            font-size: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+        
+        /* Mobile Menu */
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 300px;
+            height: 100vh;
+            background: var(--primary);
+            z-index: 2000;
+            transition: right 0.4s ease-in-out;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+        
+        .mobile-menu.active {
+            right: 0;
+        }
+        
+        .mobile-menu-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .close-mobile-menu {
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+        
+        .mobile-nav-links {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+        }
+        
+        .mobile-nav-links a {
+            color: var(--text-light);
+            text-decoration: none;
+            font-size: 1.2rem;
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+        
+        .mobile-nav-links a i {
+            width: 30px;
+            text-align: center;
+        }
+        
+        .mobile-cart-icon {
+            position: relative;
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+        }
+        
+        .mobile-cart-count {
+            background: var(--secondary);
+            color: white;
+            width: 22px;
+            height: 22px;
+            border-radius: 50%;
+            font-size: 0.75rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+        }
+        
+        /* Cart Modal */
+        .cart-modal {
+            position: fixed;
+            top: 0;
+            right: -400px;
+            width: 380px;
+            height: 100vh;
+            background: var(--primary);
+            z-index: 2000;
+            box-shadow: -5px 0 15px rgba(0,0,0,0.3);
+            transition: right 0.4s ease-in-out;
+            padding: 2rem;
+            overflow-y: auto;
+        }
+        
+        .cart-modal.active {
+            right: 0;
+        }
+        
+        .cart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1rem;
+            border-bottom: 1px solid var(--border);
+        }
+        
+        .cart-title {
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .close-cart {
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .close-cart:hover {
+            color: var(--secondary);
+        }
+        
+        .cart-items {
+            margin-bottom: 2rem;
+        }
+        
+        .cart-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid rgba(255,255,255,0.1);
+        }
+        
+        .cart-item-img {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            object-fit: cover;
+        }
+        
+        .cart-item-details {
+            flex: 1;
+        }
+        
+        .cart-item-name {
+            font-size: 1rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .cart-item-price {
+            color: var(--secondary);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+        
+        .quantity-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+        
+        .quantity-btn {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+        
+        .quantity-btn:hover {
+            background: var(--secondary);
+        }
+        
+        .quantity-display {
+            min-width: 30px;
+            text-align: center;
+        }
+        
+        .cart-item-remove {
+            background: none;
+            border: none;
+            color: #ff4d4d;
+            cursor: pointer;
+            font-size: 1.2rem;
+            align-self: flex-start;
+        }
+        
+        .cart-total {
+            display: flex;
+            justify-content: space-between;
+            font-size: 1.2rem;
+            font-weight: 600;
+            padding: 1.5rem 0;
+            margin-bottom: 1.5rem;
+            border-top: 1px solid var(--border);
+        }
+        
+        .checkout-btn {
+            display: block;
+            width: 100%;
+            padding: 1rem;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+        }
+        
+        .checkout-btn:hover {
+            background: #128c7e;
+            transform: translateY(-3px);
+        }
+        
+        /* Hero Section */
+        .hero {
+            position: relative;
+            height: 80vh;
+            display: flex;
+            align-items: center;
+            overflow: hidden;
+        }
+        
+        .hero::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0, 0, 0, 0.7), rgba(0, 0, 0, 0.9)), 
+                        url('https://hairsalonbarrie.ca/wp-content/uploads/2022/10/mens-salon-thegem-blog-default.jpg');
+            background-size: cover;
+            background-position: center;
+            z-index: -1;
+        }
+        
+        .hero-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            width: 100%;
+            text-align: center;
+        }
+        
+        .hero-title {
+            font-size: 4rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+            background: linear-gradient(to right, #ff7e33, #ffaa33);
+            -webkit-background-clip: text;
+            background-clip: text;
+            color: transparent;
+            animation: fadeInDown 1s ease;
+        }
+        
+        .hero-subtitle {
+            font-size: 1.5rem;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+            color: rgba(255, 255, 255, 0.9);
+            animation: fadeInUp 1s ease;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            padding: 1.2rem 2.5rem;
+            background: linear-gradient(135deg, #ff7e33, #ff5e00);
+            color: white;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.1rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 25px rgba(255, 126, 51, 0.4);
+            animation: fadeIn 1.5s ease;
+        }
+        
+        .cta-button:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 30px rgba(255, 126, 51, 0.6);
+        }
+        
+        /* Products Section */
+        .products-section {
+            padding: 5rem 2rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-title {
+            font-size: 2.8rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+            position: relative;
+            display: inline-block;
+        }
+        
+        .section-title::after {
+            content: '';
+            position: absolute;
+            bottom: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 100px;
+            height: 4px;
+            background: var(--secondary);
+            border-radius: 2px;
+        }
+        
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: rgba(255, 255, 255, 0.7);
+            max-width: 700px;
+            margin: 1.5rem auto 0;
+        }
+        
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 2.5rem;
+        }
+        
+        .product-card {
+            background: var(--card-bg);
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+            transition: all 0.4s ease;
+            border: 1px solid var(--border);
+            position: relative;
+            transform: translateY(0);
+            animation: fadeInUp 0.8s ease-out;
+        }
+        
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 40px rgba(255, 126, 51, 0.2);
+            border-color: rgba(255, 126, 51, 0.5);
+        }
+        
+        .product-image {
+            position: relative;
+            overflow: hidden;
+            height: 250px;
+        }
+        
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+        
+        .product-card:hover .product-image img {
+            transform: scale(1.05);
+        }
+        
+        .product-badge {
+            position: absolute;
+            top: 15px;
+            left: 15px;
+            background: var(--secondary);
+            color: white;
+            padding: 0.4rem 1rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+            z-index: 2;
+            text-transform: uppercase;
+        }
+        
+        .product-info {
+            padding: 1.8rem;
+        }
+        
+        .product-category {
+            color: var(--secondary);
+            font-size: 0.85rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 0.8rem;
+            letter-spacing: 1px;
+        }
+        
+        .product-title {
+            font-size: 1.3rem;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 1rem;
+            line-height: 1.4;
+        }
+        
+        .product-description {
+            color: rgba(255, 255, 255, 0.7);
+            font-size: 0.95rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.6;
+        }
+        
+        .product-price {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            flex-wrap: wrap;
+        }
+        
+        .current-price {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: white;
+        }
+        
+        .original-price {
+            font-size: 1.1rem;
+            color: rgba(255, 255, 255, 0.5);
+            text-decoration: line-through;
+        }
+        
+        .discount {
+            background: var(--secondary);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 4px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+        
+        .product-actions {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap; /* Allow buttons to wrap on smaller screens */
+        }
+        
+        .btn {
+            padding: 0.9rem 1.2rem;
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            font-size: 1rem;
+        }
+        
+        .btn-primary {
+            flex: 1;
+            background: linear-gradient(135deg, #ff7e33, #ff5e00);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #ff6a1a, #ff4d00);
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(255, 126, 51, 0.4);
+        }
+        
+        .btn-secondary {
+            flex: 1; /* Make secondary button also flexible */
+            background: transparent;
+            color: var(--secondary);
+            border: 2px solid var(--secondary);
+        }
+        
+        .btn-secondary:hover {
+            background: rgba(255, 126, 51, 0.1);
+        }
+
+        /* Full Product Modal */
+        .product-detail-modal {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--overlay);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            z-index: 3000;
+            opacity: 0;
+            visibility: hidden;
+            transition: opacity 0.3s ease, visibility 0.3s ease;
+        }
+
+        .product-detail-modal.active {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .product-detail-content {
+            background: var(--card-bg);
+            border-radius: 15px;
+            padding: 2rem;
+            max-width: 900px;
+            width: 90%;
+            display: flex;
+            gap: 2rem;
+            position: relative;
+            max-height: 90vh;
+            overflow-y: auto;
+            transform: scale(0.9);
+            transition: transform 0.3s ease;
+        }
+
+        .product-detail-modal.active .product-detail-content {
+            transform: scale(1);
+        }
+
+        .product-detail-image {
+            flex: 1;
+        }
+
+        .product-detail-image img {
+            width: 100%;
+            height: auto;
+            border-radius: 10px;
+        }
+
+        .product-detail-info {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .product-detail-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 1rem;
+        }
+
+        .product-detail-category {
+            color: var(--secondary);
+            font-size: 1rem;
+            font-weight: 600;
+            text-transform: uppercase;
+            margin-bottom: 0.8rem;
+        }
+
+        .product-detail-description {
+            color: rgba(255, 255, 255, 0.8);
+            font-size: 1.1rem;
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .product-detail-price {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 2rem;
+        }
+
+        .product-detail-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .close-product-detail {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            background: none;
+            border: none;
+            color: var(--text-light);
+            font-size: 2rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .close-product-detail:hover {
+            color: var(--secondary);
+        }
+        
+        /* Footer */
+        .footer {
+            background: #0c0c0c;
+            padding: 4rem 2rem 2rem;
+            border-top: 1px solid var(--border);
+        }
+        
+        .footer-content {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+        }
+        
+        .footer-column h3 {
+            font-size: 1.4rem;
+            margin-bottom: 1.5rem;
+            color: white;
+            position: relative;
+            padding-bottom: 0.5rem;
+        }
+        
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 50px;
+            height: 2px;
+            background: var(--secondary);
+        }
+        
+        .footer-links {
+            list-style: none;
+        }
+        
+        .footer-links li {
+            margin-bottom: 0.8rem;
+        }
+        
+        .footer-links a {
+            color: rgba(255, 255, 255, 0.7);
+            text-decoration: none;
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+        
+        .footer-links a:hover {
+            color: var(--secondary);
+            transform: translateX(5px);
+        }
+        
+        .contact-info {
+            color: rgba(255, 255, 255, 0.7);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .contact-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 1rem;
+        }
+        
+        .contact-icon {
+            color: var(--secondary);
+            font-size: 1.2rem;
+        }
+        
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .social-link {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.1);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            transition: all 0.3s ease;
+        }
+        
+        .social-link:hover {
+            background: var(--secondary);
+            transform: translateY(-5px);
+        }
+        
+        .copyright {
+            max-width: 1400px;
+            margin: 3rem auto 0;
+            padding-top: 2rem;
+            text-align: center;
+            border-top: 1px solid var(--border);
+            color: rgba(255, 255, 255, 0.5);
+            font-size: 0.9rem;
+        }
+        
+        /* WhatsApp Button */
+        .whatsapp-float {
+            position: fixed;
+            width: 60px;
+            height: 60px;
+            bottom: 30px;
+            right: 30px;
+            background-color: var(--accent);
+            color: white;
+            border-radius: 50px;
+            text-align: center;
+            font-size: 30px;
+            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.3);
+            z-index: 100;
+            animation: whatsappPulse 2s infinite;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: 3px solid white;
+        }
+        
+        .whatsapp-float:hover {
+            background-color: #128c7e;
+            transform: scale(1.1);
+            box-shadow: 0 8px 30px rgba(37, 211, 102, 0.4);
+        }
+        
+        @keyframes whatsappPulse {
+            0% {
+                box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
+                transform: scale(1);
+            }
+            50% {
+                box-shadow: 0 4px 30px rgba(37, 211, 102, 0.5);
+                transform: scale(1.05);
+            }
+            100% {
+                box-shadow: 0 4px 20px rgba(37, 211, 102, 0.3);
+                transform: scale(1);
+            }
+        }
+        
+        /* Animations */
+        @keyframes fadeIn {
+            from { opacity: 0; }
+            to { opacity: 1; }
+        }
+        
+        @keyframes fadeOut {
+            from { opacity: 1; }
+            to { opacity: 0; }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero-title {
+                font-size: 3rem;
+            }
+            
+            .nav-links {
+                gap: 1.5rem;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .nav-links {
+                display: none;
+            }
+
+            .product-detail-content {
+                flex-direction: column;
+            }
+            
+            .product-detail-info {
+                text-align: center;
+            }
+            
+            .product-detail-actions {
+                justify-content: center;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .header-content {
+                padding: 0 1.5rem;
+            }
+            
+            .hero-title {
+                font-size: 2.5rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .section-title {
+                font-size: 2.2rem;
+            }
+            
+            .cart-modal {
+                width: 320px;
+            }
+            
+            .products-grid {
+                grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            }
+
+            .product-detail-content {
+                padding: 1.5rem;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .header-content {
+                padding: 0 1rem;
+            }
+            
+            .logo-text {
+                font-size: 1.5rem;
+            }
+            
+            .logo-icon {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
+            
+            .hero-title {
+                font-size: 2rem;
+            }
+            
+            .hero-subtitle {
+                font-size: 1rem;
+            }
+            
+            .cta-button {
+                padding: 1rem 2rem;
+                font-size: 1rem;
+            }
+            
+            .section-title {
+                font-size: 1.8rem;
+            }
+            
+            .product-actions {
+                flex-direction: column;
+            }
+            
+            .cart-modal {
+                width: 100%;
+                padding: 1rem;
+            }
+            
+            .mobile-menu {
+                width: 100%;
+            }
+
+            .product-detail-actions {
+                flex-direction: column;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-content">
+            <a href="#" class="logo">
+               <img style="width: 140px;" sizes="20250720_092322.png" srcset="20250720_092322.png" src="20250720_092322.png" alt="20250720_092322.png">
+                <h1 class="logo-text">DakshRaj <span>wholesale</span></h1>
+            </a>
+            
+            <button class="mobile-menu-btn" id="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+            
+            <nav class="nav-links">
+                <ul>
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="products.html" class="active">Products</a></li>
+                    <li><a href="#">Services</a></li>
+                    <li><a href="#">Contact Us</a></li>
+                      <li><a href="#"><i class="fas fa-box"></i> Gallery </a></li>
+                    <li>
+                        <div class="cart-icon" id="cart-icon">
+                            <i class="fas fa-shopping-cart"></i>
+                            <span class="cart-count" id="cart-count">0</span>
+                        </div>
+                    </li>
+                </ul>
+            </nav>
+        </div>
+    </header>
+    
+    <div class="mobile-menu" id="mobile-menu">
+        <div class="mobile-menu-header">
+            <h3 class="logo-text">DakshRaj</h3>
+            <button class="close-mobile-menu" id="close-mobile-menu">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <ul class="mobile-nav-links">
+            <li><a href="index.html"><i class="fas fa-home"></i> Home</a></li>
+            <li><a href="#"><i class="fas fa-info-circle"></i> About Us</a></li>
+            <li><a href="products.html" class="active"><i class="fas fa-box"></i> Products</a></li>
+            <li><a href="#"><i class="fas fa-concierge-bell"></i> Services</a></li>
+            <li><a href="#"><i class="fas fa-phone-alt"></i> Contact Us</a></li>
+            <li><a href="#"><i class="fas fa-box"></i> Gallery </a></li>
+            <li>
+                <a href="#" class="mobile-cart-icon" id="mobile-cart-btn">
+                    <i class="fas fa-shopping-cart"></i> 
+                    Cart
+                    <span class="mobile-cart-count" id="mobile-cart-count">0</span>
+                </a>
+            </li>
+        </ul>
+    </div>
+
+    <div class="cart-modal" id="cart-modal">
+        <div class="cart-header">
+            <h3 class="cart-title">Your Cart</h3>
+            <button class="close-cart" id="close-cart">&times;</button>
+        </div>
+        <div class="cart-items" id="cart-items">
+            </div>
+        <div class="cart-total">
+            <span>Total:</span>
+            <span id="cart-total-price">₹0</span>
+        </div>
+        <a href="#" class="checkout-btn" id="checkout-btn">
+            <i class="fab fa-whatsapp"></i> Checkout via WhatsApp
+        </a>
+        <p style="text-align: center; font-size: 0.9em; color: rgba(255,255,255,0.6); margin-top: 1rem;">Minimum order quantity is 10 pieces per product.</p>
+    </div>
+
+    <div class="product-detail-modal" id="product-detail-modal">
+        <div class="product-detail-content">
+            <button class="close-product-detail" id="close-product-detail">&times;</button>
+            <div class="product-detail-image" id="detail-product-image">
+                <img src="" alt="Product Image">
+            </div>
+            <div class="product-detail-info">
+                <p class="product-detail-category" id="detail-product-category"></p>
+                <h3 class="product-detail-title" id="detail-product-title"></h3>
+                <p class="product-detail-description" id="detail-product-description"></p>
+                <div class="product-detail-price" id="detail-product-price"></div>
+                <div class="product-detail-actions">
+                    <button class="btn btn-primary add-to-cart-modal" data-id="">
+                        <i class="fas fa-shopping-cart"></i> Add 10 to Cart
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Welcome Selone Partner's</h1>
+            <p class="hero-subtitle">Discover our collection of high-quality, natural-looking hair systems designed to restore confidence and transform your appearance</p>
+            <a href="#products" class="cta-button">Explore Collection</a>
+        </div>
+    </section>
+
+    <section id="products" class="products-section">
+        <div class="section-header">
+            <h2 class="section-title">Our Products</h2>
+            <p class="section-subtitle">Each hair system is crafted with precision using the finest materials for a natural look and comfortable fit</p>
+        </div>
+        
+        <div class="products-grid" id="products-container">
+            </div>
+    </section>
+
+    <footer class="footer">
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>About Us</h3>
+                <p style="color: rgba(255,255,255,0.7); margin-bottom: 1.5rem;">DakshRaj Hair Systems has been providing premium hair restoration solutions for over 15 years, helping thousands regain their confidence.</p>
+                <div class="social-links">
+                    <a href="#" class="social-link"><i class="fab fa-facebook-f"></i></a>
+                    <a href="https://www.instagram.com/dakshraj_hair_replacement?utm_source=qr&igsh=eGM4YnBieHN6bXB2" class="social-link"><i class="fab fa-instagram"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-twitter"></i></a>
+                    <a href="#" class="social-link"><i class="fab fa-youtube"></i></a>
+                </div>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Quick Links</h3>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Home</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> About Us</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Products</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Services</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Contact</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Products</h3>
+                <ul class="footer-links">
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Men's Hair Systems</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Women's Wigs</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Hair Integration</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Toupees</a></li>
+                    <li><a href="#"><i class="fas fa-chevron-right"></i> Accessories</a></li>
+                </ul>
+            </div>
+            
+            <div class="footer-column">
+                <h3>Contact Us</h3>
+                <div class="contact-info">
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-map-marker-alt"></i>
+                        </div>
+                        <div> kasrawad khargon Indore Madhya Pradesh</div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-phone-alt"></i>
+                        </div>
+                        <div>+91 83053 83586</div>
+                    </div>
+                    <div class="contact-item">
+                        <div class="contact-icon">
+                            <i class="fas fa-envelope"></i>
+                        </div>
+                        <div>info@dakshrajhairsystems.com</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div class="copyright">
+            &copy; 2023 DakshRaj Hair Systems. All Rights Reserved.
+        </div>
+    </footer>
+
+    <a href="#" class="whatsapp-float" id="whatsapp-float">
+        <i class="fab fa-whatsapp"></i>
+    </a>
+
+    <script>
+        // Product Data - 30+ products
+        const products = [
+            {
+                id: 1,
+                name: "Mono-1 Natural Hair System",
+                category: "Men's Collection",
+                description: "Premium human hair system with ultra-thin skin base for undetectable hairline and maximum comfort. Made with 100% Remy human hair, this system offers natural movement and styling versatility.",
+                price: 1780,
+                image: "https://pbaria.com/wp-content/uploads/2024/05/Dura-1.jpg"
+            },
+            {
+                id: 2,
+                name: "Mono-2 Black Natural Hair System ",
+                category: "Men's Collection",
+                description: "100% human hair wig with Swiss lace front for natural hairline and versatile styling options. This premium wig features a monofilament top for realistic scalp appearance and hand-tied strands for natural movement.",
+                price: 1860,
+                image: "https://pbaria.com/wp-content/uploads/2023/12/Blake.jpg"
+            },
+            {
+                id: 3,
+                name: "Mono-3 Apolo USA Natural Hair Patch ",
+                category: "Hair Solutions",
+                description: "Advanced hair integration system that blends seamlessly with your existing hair for natural volume. This system uses a breathable mesh base with individually hand-tied hairs for maximum realism.",
+                price: 2000,
+                image: "https://pbaria.com/wp-content/uploads/2024/05/Eko-2.jpg"
+            },
+            {
+                id: 4,
+                name: "Lace Front Fine Mono with PU Perimeter.",
+                category: "Men's Collection",
+                description: "Professional-grade hair replacement system designed for business executives. Features a lightweight French lace base with poly perimeter for durability and natural appearance.",
+                price: 4200,
+                image: "https://pbaria.com/wp-content/uploads/2024/05/M13.jpg"
+            },
+            {
+                id: 5,
+                name: "Apollo: Swiss lace front fine monofilament with PU perimeter all around.",
+                category: "Men's Collection",
+                description: "Luxurious curly hair system made with 100% virgin human hair. Features a monofilament top with lace front for versatile styling and natural hairline. Perfect for creating voluminous, bouncy curls.",
+                price: 4350,
+                image: "https://pbaria.com/wp-content/uploads/2024/10/Apollo-1.jpg"
+            },
+            {
+                id: 6,
+                name: "M14: Lace Front Fine Mono with NPU Perimeter.",
+                category: "Men's Collection",
+                description: "Revolutionary ultra-thin skin hairpiece with injected hair for maximum realism. The 0.03mm poly skin base mimics the scalp perfectly and provides a waterproof, durable solution.",
+                price: 4570,
+                image: "https://pbaria.com/wp-content/uploads/2024/10/M14.jpg"
+            },
+            {
+                id: 7,
+                name: "M21: Fine Monofilament with PU Perimeter.",
+                category: "Women's Collection",
+                description: "Premium straight wig with silky smooth 100% human hair. Features a lace front with bleached knots for undetectable hairline and a comfortable monofilament top.",
+                price: 4200,
+                image: "https://pbaria.com/wp-content/uploads/2025/03/M21.jpg"
+            },
+            {
+                id: 8,
+                name: "BMW: Fine Monofilament with PU Perimeter.",
+                category: "Men's Collection",
+                description: "Ultra-breathable lace hair system with V-looped hair for natural movement. The Swiss lace base allows for excellent ventilation and comfort during extended wear.",
+                price: 5200,
+                image: "https://pbaria.com/wp-content/uploads/2025/03/BMW.jpg"
+            },
+            {
+                id: 9,
+                name: "Full Lace: French Lace Base reinforced with hand-sewn support lines.",
+                category: "Hair Solutions",
+                description: "Specialized system for adding volume to thinning hair. Features a breathable mesh base with strategically placed hair clusters to create natural-looking density.",
+                price: 5800,
+                image: "https://pbaria.com/wp-content/uploads/2024/10/Full-Lace-1.jpg"
+            },
+            {
+                id: 10,
+                name: "Pabaria Miraze IlluZen -1 : Silk Top Hidden Knots ",
+                category: "Indias Best Hair Patch",
+                description: "Professional-grade hair system for executives, featuring a hybrid base with lace center and poly perimeter for durability and comfort.",
+                price:  12950,
+                image: "https://pbaria.com/wp-content/uploads/2025/01/IlluZen.jpg"
+            },
+            {
+                id: 11,
+                name: "Pabaria Miraze IlluZen -2 : Silk Top Hidden Knots ",
+                category: "Indias Best Hair Patch",
+                description: "Beautiful natural wave wig made from 100% human hair. Features a monofilament part for realistic scalp appearance and lace front for versatile styling options.",
+                price: 14970,
+                image: "https://pbaria.com/wp-content/uploads/2025/01/IlluZen-2-2.jpg"
+            },
+            {
+                id: 12,
+                name: "Pabaria Miraze IlluZen -3 : Extra Poly Front Silk Top Hidden Knots with Clear PU Perimeter. ",
+                category: "Indias Best Hair Patch",
+                description: "High-quality toupee with ultra-thin skin base and injected hair. Perfect for covering small areas of hair loss while providing a natural look and feel.",
+                price: 16970,
+                image: "https://pbaria.com/wp-content/uploads/2025/01/IlluZen-3-1.jpg"
+            },
+            {
+                id: 13,
+                name: "iPoly: Poly Skin Base.",
+                category: "Hair Solutions",
+                description: "Premium hair patch for targeted hair loss coverage. Made with 100% human hair and a breathable lace base for comfort and natural appearance.",
+                price: 14960,
+                image: "https://pbaria.com/wp-content/uploads/2025/03/iPoly.jpg"
+            },
+            {
+                id: 14,
+                name: "Lace Frontal: Full French Lace.",
+                category: "Men's Collection",
+                description: "Timeless bob wig with sleek cut and natural movement. Made from high-quality synthetic fibers that mimic the look and feel of real hair.",
+                price: 2600,
+                image: "https://pbaria.com/wp-content/uploads/2023/12/Lace-Frontal.jpg"
+            },
+            {
+                id: 15,
+                name: "Mahim: Full Hade Wig",
+                category: "Men's Collection",
+                description: "Lightweight hair system designed for active lifestyles. Features a durable base that withstands sweat and movement while maintaining a natural look.",
+                price: 12000,
+                image: "https://pbaria.com/wp-content/uploads/2025/03/Mahim.jpg"
+            },
+            {
+                id: 16,
+                name: "Octagon: French Lace with NPU Reinforcement on the Sides and Back.",
+                category: "Men's Collection",
+                description: "Gorgeous long curly wig with defined ringlets. Made from heat-resistant synthetic fibers that maintain their shape and style.",
+                price: 4800,
+                image: "https://pbaria.com/wp-content/uploads/2024/10/Octagon-1.jpg"
+            },
+            {
+                id: 17,
+                name: "Poly Frontal: Men’s Hair Repair Thin Poly Skin Frontal.",
+                category: "Men's Collection",
+                description: "Complete coverage hair system for extensive hair loss. Features a breathable lace base and natural hairline for undetectable wear.",
+                price: 2970,
+                image: "https://pbaria.com/wp-content/uploads/2023/12/Poly-Frontal-1.jpg"
+            },
+            {
+                id: 18,
+                name: "Poly Fuse: Transparent, Soft, Thin Poly Skin.",
+                category: "Men's Collection",
+                description: "Chic pixie cut wig with textured layers for a modern look. Easy to maintain and style, perfect for everyday wear.",
+                price: 6800,
+                image: "https://pbaria.com/wp-content/uploads/2023/12/Poly-Fuse-1.jpg"
+            },
+            {
+                id: 19,
+                name: "Poly Gauge: High-Strength Poly Gauge Base.",
+                category: "Skin Hair Patch",
+                description: "High-quality hair topper for adding volume and coverage to thinning areas. Features a lightweight base and natural-looking hair.",
+                price: 6200,
+                image: "https://pbaria.com/wp-content/uploads/2023/12/Poly-Gauge-1.jpg"
+            },
+            {
+                id: 20,
+                name: "Golden Miraze Frant Lace System",
+                category: "Men's Collection",
+                description: "Premium lace hair system with hand-tied hairs for maximum realism. Designed for business professionals who need a natural appearance.",
+                price: 6990,
+                image: "https://5.imimg.com/data5/SELLER/Default/2023/7/326433128/YU/UG/IA/72767065/golden-mirage-front-lace-hair-patch-1000x1000.jpeg"
+            },
+            {
+                id: 21,
+                name: "Newlo Lace Front Tape 36pcs/Bag",
+                category: "All Frant Lace Hair",
+                description: "Beautiful shoulder-length wig with natural waves. Made from 100% human hair for the most realistic look and feel.",
+                price: 220,
+                image: "https://newlo.in/wp-content/uploads/2025/05/41AezgXdSIL._SX466_.jpg"
+            },
+            {
+                id: 22,
+                name: "Walker C-22 Solvent",
+                category: "Gum Remover ",
+                description: "Undetectable hair patch with ultra-thin skin base. Perfect for covering small areas of hair loss with a natural-looking result.",
+                price: 680,
+                image: "https://newlo.in/wp-content/uploads/2025/05/wig-glue-remover-solvent-citrus-22-solvent-c-remover-1-c2solvent-original-imah5hahrgjh2hv3.webp"
+            },
+            {
+                id: 23,
+                name: "Newlo Yellow Wig Fix tape 20 Yard - Ultra Hold & Skin-Safe",
+                category: "Hair Patch Product",
+                description: "Traditional men's hair system with classic styling options. Features a durable base and natural-looking hair for everyday wear.",
+                price: 290,
+                image: "https://www.jiomart.com/images/product/original/rv8hglriw2/newlo-yellow-wig-fix-tape-20-yard-ultra-hold-skin-safe-product-images-orv8hglriw2-p610092043-1-202410111332.jpg?im=Resize=(420,420)"
+            },
+            {
+                id: 24,
+                name: "Walker Ultra Hold Gum",
+                category: "Hair Patch Gum",
+                description: "Elegant long straight wig with silky texture. Made from premium synthetic fibers that resist tangling and maintain their shine.",
+                price: 600,
+                image: "https://5.imimg.com/data5/SELLER/Default/2021/5/JS/DX/RC/41379988/5-1000x1000.jpg"
+            },
+            {
+                id: 25,
+                name: "Walker Ultra Hold Tape",
+                category: "Men's Collection",
+                description: "Durable hair system designed for active individuals. Features a strong base that withstands physical activity and environmental factors.",
+                price: 750,
+                image: "https://5.imimg.com/data5/PG/KG/MY-8800165/roll-walker-ultra-hold-tapes-1000x1000.jpg"
+            },
+            {
+                id: 26,
+                name: "Walker Ultra Hold Gum",
+                category: "Hair Patch Gum",
+                description: "Playful short curly wig with defined curls and volume. Easy to style and maintain, perfect for everyday wear.",
+                price: 2699,
+                image: "https://5.imimg.com/data5/ANDROID/Default/2022/9/ZH/PF/CQ/97189888/product-jpeg-1000x1000.jpg"
+            },
+            {
+                id: 27,
+                name: "Jonson White Tape",
+                category: "Hair Patch Tap",
+                description: "High-end lace front hair system with realistic hairline. Features hand-tied hairs for natural movement and undetectable wear.",
+                price: 339,
+                image: "https://m.media-amazon.com/images/I/41G9ub-dNnL.jpg"
+            },
+            {
+                id: 28,
+                name: "Jonson Yellow Tape",
+                category: "Hair Patch Tap",
+                description: "Modern layered bob wig with textured ends for a contemporary look. Made from high-quality synthetic fibers that maintain their style.",
+                price: 330,
+                image: "https://rukminim2.flixcart.com/image/704/844/xif0q/hair-accessory/l/f/h/wig-tape-double-sided-transparent-easy-use-1-jons0n-yellow-tape-original-imah3q7fdhzx3cuf.jpeg?q=90&crop=false"
+            },
+            {
+                id: 29,
+                name: "Jonson Red Tape",
+                category: "Hair Patch Tap",
+                description: "Realistic hair topper for adding volume and coverage. Features a breathable base and natural-looking hair that blends seamlessly.",
+                price: 435,
+                image: "https://m.media-amazon.com/images/I/71kic6skiyL._SL1500_.jpg"
+            },
+            {
+                id: 30,
+                name: "BLUSHIA Hair Patch/Hair Toupee/Hair Wig Glue Tube For Hair System (28g)",
+                category: "Hair Patch Tub Gum",
+                description: "Top-of-the-line hair system with premium materials and construction. Features the most realistic appearance and longest-lasting durability.",
+                price: 369,
+                image: "https://m.media-amazon.com/images/I/615lYvFU7GL._SL1500_.jpg"
+            }
+        ];
+
+        // Cart functionality
+        let cart = [];
+        const MIN_ORDER_QUANTITY = 10;
+        
+        // DOM Elements
+        const cartIcon = document.getElementById('cart-icon');
+        const cartModal = document.getElementById('cart-modal');
+        const closeCart = document.getElementById('close-cart');
+        const cartItems = document.getElementById('cart-items');
+        const cartCount = document.getElementById('cart-count');
+        const cartTotalPrice = document.getElementById('cart-total-price');
+        const checkoutBtn = document.getElementById('checkout-btn');
+        const productsContainer = document.getElementById('products-container');
+        const whatsappFloat = document.getElementById('whatsapp-float');
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        const closeMobileMenu = document.getElementById('close-mobile-menu');
+        const mobileCartBtn = document.getElementById('mobile-cart-btn');
+        const mobileCartCount = document.getElementById('mobile-cart-count');
+
+        // Product Detail Modal elements
+        const productDetailModal = document.getElementById('product-detail-modal');
+        const closeProductDetail = document.getElementById('close-product-detail');
+        const detailProductImage = document.getElementById('detail-product-image').querySelector('img');
+        const detailProductCategory = document.getElementById('detail-product-category');
+        const detailProductTitle = document.getElementById('detail-product-title');
+        const detailProductDescription = document.getElementById('detail-product-description');
+        const detailProductPrice = document.getElementById('detail-product-price');
+        const addTenToCartBtn = document.querySelector('.add-to-cart-modal');
+
+
+        // Initialize the page
+        document.addEventListener('DOMContentLoaded', () => {
+            renderProducts();
+            setupEventListeners();
+        });
+
+        // Render products to the page
+        function renderProducts() {
+            productsContainer.innerHTML = '';
+            products.forEach(product => {
+                const productCard = document.createElement('div');
+                productCard.className = 'product-card';
+                productCard.innerHTML = `
+                    <div class="product-image">
+                        <img src="${product.image}" alt="${product.name}">
+                    </div>
+                    <div class="product-info">
+                        <p class="product-category">${product.category}</p>
+                        <h3 class="product-title">${product.name}</h3>
+                        <p class="product-description">${product.description.substring(0, 100)}...</p>
+                        <div class="product-price">
+                            <span class="current-price">₹${product.price.toLocaleString('en-IN')}</span>
+                        </div>
+                        <div class="product-actions">
+                            <button class="btn btn-primary add-to-cart" data-id="${product.id}">
+                                <i class="fas fa-shopping-cart"></i> Add to Cart (Min 10)
+                            </button>
+                            <button class="btn btn-secondary view-product" data-id="${product.id}">
+                                <i class="fas fa-eye"></i> View
+                            </button>
+                        </div>
+                    </div>
+                `;
+                productsContainer.appendChild(productCard);
+            });
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+            // Cart functionality
+            cartIcon.addEventListener('click', toggleCart);
+            closeCart.addEventListener('click', toggleCart);
+            checkoutBtn.addEventListener('click', checkout);
+            
+            // Mobile menu functionality
+            mobileMenuBtn.addEventListener('click', () => mobileMenu.classList.add('active'));
+            closeMobileMenu.addEventListener('click', () => mobileMenu.classList.remove('active'));
+            mobileCartBtn.addEventListener('click', () => {
+                mobileMenu.classList.remove('active');
+                toggleCart();
+            });
+            
+            // Add to cart buttons on product cards
+            document.addEventListener('click', function(e) {
+                if (e.target.classList.contains('add-to-cart') || 
+                    e.target.parentElement.classList.contains('add-to-cart')) {
+                    const btn = e.target.classList.contains('add-to-cart') ? 
+                                e.target : e.target.parentElement;
+                    const productId = parseInt(btn.dataset.id);
+                    addToCart(productId, MIN_ORDER_QUANTITY); // Add min quantity directly
+                }
+                // View product button
+                if (e.target.classList.contains('view-product') ||
+                    e.target.parentElement.classList.contains('view-product')) {
+                    const btn = e.target.classList.contains('view-product') ?
+                                e.target : e.target.parentElement;
+                    const productId = parseInt(btn.dataset.id);
+                    showProductDetail(productId);
+                }
+            });
+
+            // Add to cart button in product detail modal
+            addTenToCartBtn.addEventListener('click', function() {
+                const productId = parseInt(this.dataset.id);
+                addToCart(productId, MIN_ORDER_QUANTITY);
+                hideProductDetail(); // Close modal after adding to cart
+            });
+
+            // Close product detail modal
+            closeProductDetail.addEventListener('click', hideProductDetail);
+            productDetailModal.addEventListener('click', (e) => {
+                if (e.target === productDetailModal) {
+                    hideProductDetail();
+                }
+            });
+        }
+
+        // Toggle cart modal
+        function toggleCart() {
+            cartModal.classList.toggle('active');
+            renderCartItems();
+        }
+
+        // Show Product Detail Modal
+        function showProductDetail(productId) {
+            const product = products.find(p => p.id === productId);
+            if (product) {
+                detailProductImage.src = product.image;
+                detailProductCategory.textContent = product.category;
+                detailProductTitle.textContent = product.name;
+                detailProductDescription.textContent = product.description;
+                detailProductPrice.textContent = `₹${product.price.toLocaleString('en-IN')}`;
+                addTenToCartBtn.dataset.id = product.id; // Set product ID for add to cart button
+                productDetailModal.classList.add('active');
+            }
+        }
+
+        // Hide Product Detail Modal
+        function hideProductDetail() {
+            productDetailModal.classList.remove('active');
+        }
+
+
+        // Add product to cart
+        function addToCart(productId, quantityToAdd = 1) {
+            const product = products.find(p => p.id === productId);
+            if (product) {
+                const existingItem = cart.find(item => item.id === productId);
+                
+                if (existingItem) {
+                    // If item exists, ensure quantity meets minimum if adding from button that enforces it
+                    if (quantityToAdd === MIN_ORDER_QUANTITY && existingItem.quantity < MIN_ORDER_QUANTITY) {
+                         existingItem.quantity = MIN_ORDER_QUANTITY;
+                         showNotification(`${product.name} quantity adjusted to minimum ${MIN_ORDER_QUANTITY}.`);
+                    } else if (quantityToAdd === MIN_ORDER_QUANTITY) {
+                         existingItem.quantity += quantityToAdd;
+                         showNotification(`${product.name} quantity increased by ${quantityToAdd}.`);
+                    } else { // For quantity controls inside cart
+                        existingItem.quantity += quantityToAdd;
+                    }
+                } else {
+                    cart.push({...product, quantity: Math.max(quantityToAdd, MIN_ORDER_QUANTITY)}); // Ensure min quantity
+                    showNotification(`${product.name} added to cart (Min ${MIN_ORDER_QUANTITY} pieces).`);
+                }
+                
+                updateCartCount();
+                renderCartItems();
+            }
+        }
+
+        // Show transient notification
+        function showNotification(message) {
+            const notification = document.createElement('div');
+            notification.textContent = message;
+            notification.style.cssText = `
+                position: fixed;
+                top: 20px;
+                right: 20px;
+                background: var(--secondary);
+                color: white;
+                padding: 15px 25px;
+                border-radius: 8px;
+                z-index: 3000;
+                box-shadow: 0 5px 15px rgba(0,0,0,0.3);
+                animation: fadeIn 0.3s, fadeOut 0.3s 2.7s forwards; /* Use forwards to keep final state */
+            `;
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.remove();
+            }, 3000);
+        }
+
+        // Update cart count in header
+        function updateCartCount() {
+            const totalItems = cart.reduce((total, item) => total + item.quantity, 0);
+            cartCount.textContent = totalItems;
+            mobileCartCount.textContent = totalItems;
+        }
+
+        // Render cart items
+        function renderCartItems() {
+            cartItems.innerHTML = '';
+            let total = 0;
+            
+            if (cart.length === 0) {
+                cartItems.innerHTML = '<p style="text-align: center; color: rgba(255,255,255,0.7);">Your cart is empty.</p>';
+            }
+
+            cart.forEach(item => {
+                // Enforce minimum quantity in cart display
+                if (item.quantity < MIN_ORDER_QUANTITY) {
+                    item.quantity = MIN_ORDER_QUANTITY;
+                }
+
+                const cartItem = document.createElement('div');
+                cartItem.className = 'cart-item';
+                cartItem.innerHTML = `
+                    <img src="${item.image}" alt="${item.name}" class="cart-item-img">
+                    <div class="cart-item-details">
+                        <h4 class="cart-item-name">${item.name}</h4>
+                        <p class="cart-item-price">₹${item.price.toLocaleString('en-IN')}</p>
+                        <div class="quantity-controls">
+                            <button class="quantity-btn decrease" data-id="${item.id}">-</button>
+                            <span class="quantity-display">${item.quantity}</span>
+                            <button class="quantity-btn increase" data-id="${item.id}">+</button>
+                        </div>
+                    </div>
+                    <button class="cart-item-remove" data-id="${item.id}">&times;</button>
+                `;
+                cartItems.appendChild(cartItem);
+                total += item.price * item.quantity;
+                
+                // Add event listeners for quantity controls
+                cartItem.querySelector('.decrease').addEventListener('click', function() {
+                    updateQuantity(item.id, -1);
+                });
+                
+                cartItem.querySelector('.increase').addEventListener('click', function() {
+                    updateQuantity(item.id, 1);
+                });
+                
+                cartItem.querySelector('.cart-item-remove').addEventListener('click', function() {
+                    removeFromCart(item.id);
+                });
+            });
+            
+            cartTotalPrice.textContent = `₹${total.toLocaleString('en-IN')}`;
+        }
+
+        // Update item quantity
+        function updateQuantity(productId, change) {
+            const item = cart.find(item => item.id === productId);
+            if (item) {
+                const newQuantity = item.quantity + change;
+                
+                if (newQuantity < MIN_ORDER_QUANTITY && change < 0) {
+                    alert(`Minimum order quantity for ${item.name} is ${MIN_ORDER_QUANTITY} pieces.`);
+                    return; // Prevent quantity from going below minimum
+                } else if (newQuantity <= 0 && change < 0) {
+                    cart = cart.filter(i => i.id !== productId);
+                } else {
+                    item.quantity = newQuantity;
+                }
+                
+                updateCartCount();
+                renderCartItems();
+            }
+        }
+
+        // Remove item from cart
+        function removeFromCart(productId) {
+            cart = cart.filter(item => item.id !== productId);
+            updateCartCount();
+            renderCartItems();
+        }
+
+        // Checkout functionality
+        function checkout() {
+            if (cart.length === 0) {
+                alert('Your cart is empty!');
+                return;
+            }
+            
+            // Create WhatsApp message
+            let message = "Hello DakshRaj Hair Systems! I want to place an order:\n\n";
+            let total = 0;
+            let hasError = false;
+
+            cart.forEach(item => {
+                if (item.quantity < MIN_ORDER_QUANTITY) {
+                    alert(`Error: Minimum order quantity for ${item.name} is ${MIN_ORDER_QUANTITY} pieces. Please adjust your cart.`);
+                    hasError = true;
+                    return;
+                }
+                // Apply price * 10 logic here if the "into 10" refers to a price multiplier at checkout
+                // Assuming "into 10 minimum order quantity 10 pieces" means if quantity is 10 or more, price is multiplied by 10.
+                // If it means price *per* piece, then the current `item.price * item.quantity` is correct.
+                // Given the phrasing, I'm interpreting it as the base price of *each* piece is effectively multiplied by 10
+                // if the order quantity for *that item* is 10 or more.
+                // If the interpretation is that the ENTIRE total order price is multiplied by 10, then the logic would be different.
+                // For clarity and direct interpretation of "price mein check out karte time into 10 minimum order quantity 10 pieces",
+                // I'm assuming the *item price* itself gets multiplied for that quantity range.
+                // If it's a fixed discount after 10 pieces, you'd adjust the item.price for display.
+                // For now, let's assume `price * 10` is part of the final calculation IF quantity is >= 10.
+                // However, given the context, it's more likely the "into 10" is referring to the minimum quantity itself,
+                // and the current `item.price * item.quantity` is the correct total per item.
+                // Let's stick to the interpretation that "into 10" relates to the *minimum quantity*, not a price multiplier at checkout.
+                // If `into 10` means a specific *price change* for bulk orders (e.g., price becomes 10 times the listed value, which is unusual),
+                // please clarify. For now, I will treat "into 10 minimum order quantity 10 pieces" as simply meaning a minimum of 10 pieces.
+                // If the user meant "price per piece should be 10 times higher for orders >= 10" this is a very unusual pricing model.
+                // Most likely, they mean "you must order a minimum of 10 pieces, and the price will be for those 10 pieces."
+                // I will proceed assuming the minimum quantity is 10 and the price logic remains `item.price * item.quantity`.
+                // If "into 10" means a bulk price of `item.price * 10` for `10` quantity, and `item.price * quantity` for higher quantities,
+                // that's also a possibility, but less common for "into 10" phrasing.
+                // The current code already calculates `item.price * item.quantity`. The "into 10" phrasing is ambiguous.
+                // I will NOT multiply the price by 10 for each item *again* here, as the base price already implies per piece.
+                // The minimum order quantity of 10 pieces is the primary constraint.
+
+                message += `- ${item.name} (Qty: ${item.quantity} pieces) - ₹${(item.price * item.quantity).toLocaleString('en-IN')}\n`;
+                total += item.price * item.quantity;
+            });
+
+            if (hasError) {
+                return; // Stop checkout if there are quantity errors
+            }
+            
+            message += `\nTotal: ₹${total.toLocaleString('en-IN')}\n`;
+            message += "Please confirm my order. Thank you!";
+            
+            // Encode message for URL
+            const encodedMessage = encodeURIComponent(message);
+            
+            // Create WhatsApp URL
+            const whatsappUrl = `https://wa.me/918305383506?text=${encodedMessage}`;
+            
+            // Open WhatsApp
+            window.open(whatsappUrl, '_blank');
+            
+            // Close cart modal
+            cartModal.classList.remove('active');
+            
+            // Clear cart
+            cart = [];
+            updateCartCount();
+            renderCartItems(); // Re-render cart to show empty state
+        }
+
+        // Set WhatsApp float button
+        whatsappFloat.href = "https://wa.me/918305383506";
+    </script>
+</body>
+</html>
